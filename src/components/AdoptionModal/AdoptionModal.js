@@ -14,7 +14,7 @@ function AdoptionModal(props) {
     return <span style={{ fontSize: '20px', fontFamily: 'Monospace' }}>{label}</span>;
   };
   // contries ///////////////////////////////////////
-  useEffect(() => {
+  useEffect(() => {   
     fetchCountries();
   }, []);
 
