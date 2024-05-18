@@ -1,148 +1,169 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import "./AdoptionModal.css";
+import React, { useState, useEffect } from "react";
+import { Modal, Button, Form, Dropdown } from "react-bootstrap";
+import Select from 'react-select';
+import './AdoptionModal.css'
 
-Modal.setAppElement('#root'); // Set the app element for accessibility
+function AdoptionModal(props) {
+  //age//////////////////////////////////////////
+  const [year, setYear] = useState(1);
+  const [month, setMonth] = useState(1);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [options, setOptions] = useState([]);
+  const handleDisplay = () => {
+    const label = `${year} Years and ${month} Months`;
+    return <span style={{ fontSize: '20px', fontFamily: 'Monospace' }}>{label}</span>;
+  };
+  // contries ///////////////////////////////////////
+  useEffect(() => {
+    fetchCountries();
+  }, []);
 
-const AdoptionModale = ({ isOpen, onClose }) => {
-  const [name, setName] = useState("");
-  const [origin, setOrigin] = useState("");
-  const [temperament, setTemperament] = useState("");
-  const [color, setColor] = useState("");
-  const [overview, setOverview] = useState("");
-  const [imageSrc, setImageSrc] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
+  const fetchCountries = async () => {
+    try {
+      const response = await fetch('https://freetestapi.com/api/v1/countries');
+      const data = await response.json();
+      const countriesOptions = data.map(country => ({
+        value: country.name,
+        label: country.name
+      }));
+      setOptions(countriesOptions);
+    } catch (error) {
+      console.error('Error fetching countries:', error);
+    }
+  };
+  /////////////////////////////////////////////////////////////////////////////
 
-  const handleFileInputChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImageSrc(reader.result);
-    };
-    reader.readAsDataURL(file);
+  const handleSaveChanges = () => {
+    // Handle saving form data
+    props.handleClose(); // Close the modal after saving
+  };
+  // colors ////////////////////////////////////////////////////////////////////////////////
+
+  const customStyles = {
+    // Define your custom styles for the modal if needed
   };
 
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
+
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [colors] = useState([
+    { value: 'black', label: 'Black' },
+    { value: 'white', label: 'White' },
+    { value: 'gray', label: 'Gray' },
+    { value: 'brown', label: 'Brown' },
+    { value: 'ginger', label: 'Ginger (Orange)' },
+    { value: 'tabby', label: 'Tabby (Striped)' },
+    { value: 'calico', label: 'Calico (Multi-colored)' },
+    { value: 'tortoiseshell', label: 'Tortoiseshell' },
+    { value: 'siamese', label: 'Siamese' },
+    { value: 'tuxedo', label: 'Tuxedo' }
+    // Add more colors as needed
+  ])
+
+  const handleChange = (selectedColor) => {
+    setSelectedColor(selectedColor);
   };
+
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className="modal-content"
-      overlayClassName="modal-overlay"
-    >
-      <h2>Add a Cat for Adoption</h2>
-      <form>
-        <div className="form-group">
-          <label>
-            Name:
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-        </div>
-        <div className="form-group">
-          <label>
-            Origin:
-            <input
-              type="text"
-              className="form-control"
-              name="origin"
-              value={origin}
-              onChange={(e) => setOrigin(e.target.value)}
-            />
-          </label>
-        </div>
-        <div className="form-group">
-          <label>
-            Temperament:
-            <input
-              type="text"
-              className="form-control"
-              name="temperament"
-              value={temperament}
-              onChange={(e) => setTemperament(e.target.value)}
-            />
-          </label>
-        </div>
-        <div className="form-group">
-          <label>
-            Color:
-            <input
-              type="color"
-              className="form-control"
-              name="color"
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
-            />
-          </label>
-        </div>
-        <div className="form-group">
-          <label>
-            Overview:
-            <textarea
-              className="form-control"
-              name="overview"
-              value={overview}
-              onChange={(e) => setOverview(e.target.value)}
-            ></textarea>
-          </label>
-        </div>
-        <div className="form-group">
-          <label>
-            Image:
-            <input
-              type="file"
-              accept="image/*"
-              className="form-control"
-              name="image"
-              onChange={handleFileInputChange}
-            />
-          </label>
-        </div>
-        {imageSrc && <img src={imageSrc} alt="Uploaded" />}
-        <div className="form-group">
-          <label>
-            Age:
-            <input
-              type="number"
-              className="form-control"
-              name="age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-            />
-          </label>
-        </div>
-        <div className="form-group">
-          <label>
-            Gender:
-            <select
-              className="form-control"
-              name="gender"
-              value={gender}
-              onChange={handleGenderChange}
-            >
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </label>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Meow
-        </button>
-        <button type="button" className="btn btn-secondary" onClick={onClose}>
-          Cancel
-        </button>
-      </form>
-    </Modal>
-  );
-};
+    <>
+      <Modal show={props.show} onHide={props.handleClose}>
+        <Modal.Header closeButton style={{backgroundColor:'#f8588d'}}>
+          <Modal.Title style={{ fontSize: '30px', fontFamily: 'Monospace' }}>Adoption Modal</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{backgroundColor:'#fa91b4'}}>
+          <Form>
+            <Form.Group className="mb-3" controlId="formCatName">
+              <Form.Label style={{ fontSize: '20px', fontFamily: 'Monospace' }}>Cat Name</Form.Label>
+              <Form.Control type="text" style={{ fontFamily: 'Monospace' }} placeholder="Enter cat name" />
+            </Form.Group>
 
-export default AdoptionModale;
+            <Form.Group className="mb-3" controlId="formOrigin">
+              <Form.Label style={{ fontSize: '20px', fontFamily: 'Monospace' }}>Origin</Form.Label>
+              <Select style={{ fontFamily: 'Monospace' }}
+                options={options}
+                value={selectedOption}
+                onChange={setSelectedOption}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formAge">
+              <Form.Label style={{ fontSize: '20px', fontFamily: 'Monospace' }}>Color</Form.Label>
+              <Select style={{ fontFamily: 'Monospace' }}
+                options={colors}
+                value={selectedColor}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: '20px', fontFamily: 'Monospace' }}>Age</Form.Label>
+              <div>
+                <input style={{ width: '45px', height: '25px', fontFamily: 'Monospace' }} type="number" value={year} onChange={(e) => setYear(parseInt(e.target.value))} />
+                <span style={{ fontFamily: 'Monospace' }}> Years </span>
+                <input style={{ width: '45px', height: '25px', fontFamily: 'Monospace' }} type="number" value={month} onChange={(e) => setMonth(parseInt(e.target.value))} />
+                <span style={{ fontFamily: 'Monospace' }}> Months</span>
+              </div>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: '20px', fontFamily: 'Monospace' }}>Select the gender:</Form.Label>
+              <br />
+              <Form.Check
+                type="radio"
+                label="Male"
+                name="gender"
+                id="male"
+                value="male"
+                style={{ fontFamily: 'Monospace' }}
+              />
+              <Form.Check
+                type="radio"
+                label="Female"
+                name="gender"
+                id="female"
+                value="female"
+                style={{ fontFamily: 'Monospace' }}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formImageUrl">
+              <Form.Label style={{ fontSize: '20px', fontFamily: 'Monospace' }}>Image URL</Form.Label>
+              <Form.Control type="text" style={{ fontFamily: 'Monospace' }} placeholder="Enter image URL" />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formTemperament">
+              <Form.Label style={{ fontSize: '20px', fontFamily: 'Monospace' }}>Temperament</Form.Label>
+              <Form.Control as="textarea" style={{ fontFamily: 'Monospace' }} rows={3} />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: '20px', fontFamily: 'Monospace' }}>Age Label:</Form.Label>
+              <div>{handleDisplay()}</div>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formCatName">
+              <Form.Label style={{ fontSize: '20px', fontFamily: 'Monospace' }}>Contact Number</Form.Label>
+              <Form.Control type="text" style={{ fontFamily: 'Monospace' }} placeholder="Enter Phone Number" />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+      
+
+        <Modal.Footer style={{backgroundColor:'#f8588d'}}>
+
+
+          <button className="add-kitten-button" onClick={handleSaveChanges}>
+            Save Changes
+          </button>
+          <Button variant="secondary" className="add-kitten-button" style={{ fontFamily: 'Monospace' ,marginLeft:'12px',marginRight:'140px',backgroundColor:'gray'}} onClick={props.handleClose}>
+            Close
+          </Button>
+
+        </Modal.Footer>
+
+      </Modal>
+    </>
+  );
+}
+
+
+export default AdoptionModal;
