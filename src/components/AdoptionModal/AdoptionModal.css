@@ -1,13 +1,28 @@
-.add-kitten-button {
-  background-color: #ff4081;
-  color: white;
-  border: none;
-  padding: 1rem 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  position: relative;
-  overflow: hidden;
+
+.centered-form-groups {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.add-kitten-button:hover {
+  background-color: #e03071;
+}
+
+.add-kitten-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px; /* Start position of the cat image */
+  width: 40px; /* Width of the cat image */
+  height: 40px; /* Height of the cat image */
+  background-image: url('../NavBar/cartoonFlip.png'); /* Path to your cat image */
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: translateY(-50%);
+  transition: left 0.3s ease;
+}
+
+.add-kitten-button:hover::before {
+  left: -10px; /* End position of the cat image */
 }
 

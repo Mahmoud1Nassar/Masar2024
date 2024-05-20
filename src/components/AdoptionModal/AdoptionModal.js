@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import Select from "react-select";
 import axios from "axios";
-import './AdoptionModal.css';
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
+import '../AdoptionModal/AdoptionModal.css';
 
 function AdoptionModal(props) {
   const [year, setYear] = useState(0);
@@ -14,8 +16,8 @@ function AdoptionModal(props) {
   const [gender, setGender] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [temperament, setTemperament] = useState("");
-  const [contactNumber, setContactNumber] = useState("");
   const [errors, setErrors] = useState({});
+  const [phone, setPhone] = useState('');
 
   //Api For Countries
   useEffect(() => {
@@ -48,7 +50,7 @@ function AdoptionModal(props) {
     if (!gender) newErrors.gender = "Gender is required.";
     if (!imageUrl) newErrors.imageUrl = "Image URL is required.";
     if (!temperament) newErrors.temperament = "Temperament is required.";
-    if (!contactNumber) newErrors.contactNumber = "Contact number is required.";
+    if (!phone) newErrors.phone = "Contact number is required.";
 
     setErrors(newErrors);
 
@@ -61,7 +63,7 @@ function AdoptionModal(props) {
         gender,
         image: imageUrl,
         temperament,
-        phone: contactNumber,
+        phone: phone,
       };
       //This For adding cats to the database
       try {
@@ -88,146 +90,196 @@ function AdoptionModal(props) {
 
   return (
     <>
-      <Modal show={props.show} onHide={props.handleClose}>
-        <Modal.Header closeButton style={{ backgroundColor: "#f8588d" }}>
-          <Modal.Title style={{ fontSize: "30px", fontFamily: "Monospace" }}>
+    
+      <Modal show={props.show} onHide={props.handleClose}   >
+        {/* {`/////////////////////////// Headr /////////////////////////////////`} */}
+        <Modal.Header closeButton style={{ backgroundColor: "#80dfff" , height:'55px'}}>
+         <center> <span style={{ fontSize: "30px", fontFamily: "Monospace",marginLeft:'70px' }}>
             Bring a Cat Home
-          </Modal.Title>
+          </span></center>
         </Modal.Header>
-        <Modal.Body style={{ backgroundColor: "#fa91b4" }}>
+
+        {/* {`/////////////////////////// /////////////////////////////////`} */}
+
+        <Modal.Body style={{ backgroundColor: "	#ffcccc" , height:'500px'}}>
           <Form>
-            <Form.Group className="mb-3" controlId="formCatName">
-              <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace" }}>
-                Cat Name
-              </Form.Label>
-              <Form.Control
-                type="text"
-                style={{ fontFamily: "Monospace" }}
-                placeholder="Enter cat name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                isInvalid={!!errors.name}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.name}
-              </Form.Control.Feedback>
-            </Form.Group>
+            {/* {`/////////////////////////// Name /////////////////////////////////`} */}
+            <div style={{ marginLeft: '80px' }}>
+              <Form.Group className="mb-3" controlId="formCatName">
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span style={{ fontSize: "20px", fontFamily: "Monospace", marginRight: "34px", marginLeft: '7px' }}>Name</span>
+                  <Form.Control
+                    type="text"
+                    style={{ fontFamily: "Monospace", width: '260px' }}
+                    placeholder="Enter cat name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    isInvalid={!!errors.name}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.name}
+                  </Form.Control.Feedback>
+                </div>
+              </Form.Group>
+              {/* {`////////////////////////////////////////////////////////////`} */}
 
-            <Form.Group className="mb-3" controlId="formOrigin">
-              <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace" }}>
-                Origin
-              </Form.Label>
-              <Select
-                style={{ fontFamily: "Monospace" }}
-                options={options}
-                value={selectedOption}
-                onChange={setSelectedOption}
-                isInvalid={!!errors.origin}
-              />
-              {errors.origin && <div className="invalid-feedback">{errors.origin}</div>}
-            </Form.Group>
+              {/* {`///////////////////////////Origin /////////////////////////////////`} */}
 
-            <Form.Group className="mb-3" controlId="formColor">
-              <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace" }}>
-                Color
-              </Form.Label>
-              <Select
-                style={{ fontFamily: "Monospace" }}
-                options={colors}
-                value={selectedColor}
-                onChange={setSelectedColor}
-                isInvalid={!!errors.color}
-              />
-              {errors.color && <div className="invalid-feedback">{errors.color}</div>}
-            </Form.Group>
+              <Form.Group className="mb-3" controlId="formOrigin">
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span style={{ fontSize: "20px", fontFamily: "Monospace", marginRight: "18px" }}>
+                    Origin
+                  </span>
+                  <Select
+                    style={{ fontFamily: "Monospace" }}
+                    options={options}
+                    value={selectedOption}
+                    onChange={setSelectedOption}
+                    isInvalid={!!errors.origin}
+                  />
+                </div>
+                {errors.origin && <div className="invalid-feedback">{errors.origin}</div>}
+              </Form.Group>
+              {/* {`////////////////////////////////////////////////////////////`} */}
 
-            <Form.Group className="mb-3">
-              <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace" }}>
-                Age
-              </Form.Label>
-              <div>
-                <input
-                  style={{
-                    width: "45px",
-                    height: "25px",
-                    fontFamily: "Monospace",
-                  }}
-                  type="number"
-                  value={year}
-                  onChange={(e) => setYear(parseInt(e.target.value))}
-                  isInvalid={!!errors.year}
-                />
-                <span style={{ fontFamily: "Monospace" }}> Years </span>
-                <input
-                  style={{
-                    width: "45px",
-                    height: "25px",
-                    fontFamily: "Monospace",
-                  }}
-                  type="number"
-                  value={month}
-                  onChange={(e) => setMonth(parseInt(e.target.value))}
-                  isInvalid={!!errors.month}
-                />
-                <span style={{ fontFamily: "Monospace" }}> Months</span>
-              </div>
-              {errors.year && <div className="invalid-feedback">{errors.year}</div>}
-              {errors.month && <div className="invalid-feedback">{errors.month}</div>}
-            </Form.Group>
+              {/* {`/////////////////////////// Color /////////////////////////////////`} */}
+              <Form.Group className="mb-3" controlId="formColor">
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span style={{ fontSize: "20px", fontFamily: "Monospace", marginRight: '25px' }}>
+                    Color </span>
+                  <Select
+                    style={{ fontFamily: "Monospace" }}
+                    options={colors}
+                    value={selectedColor}
+                    onChange={setSelectedColor}
+                    isInvalid={!!errors.color}
+                  />
+                </div>
+                {errors.color && <div className="invalid-feedback">{errors.color}</div>}
+              </Form.Group>
+              {/* {`////////////////////////////////////////////////////////////`} */}
 
-            <Form.Group className="mb-3">
-              <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace" }}>
-                Select the gender:
-              </Form.Label>
-              <br />
-              <Form.Check
-                type="radio"
-                label="Male"
-                name="gender"
-                id="male"
-                value="male"
-                style={{ fontFamily: "Monospace" }}
-                onChange={(e) => setGender(e.target.value)}
-                isInvalid={!!errors.gender}
-              />
-              <Form.Check
-                type="radio"
-                label="Female"
-                name="gender"
-                id="female"
-                value="female"
-                style={{ fontFamily: "Monospace" }}
-                onChange={(e) => setGender(e.target.value)}
-                isInvalid={!!errors.gender}
-              />
-              {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
-            </Form.Group>
+              {/* {`/////////////////////////// Age /////////////////////////////////`} */}
+              <Form.Group className="mb-3">
+                <div style={{ display: "flex", alignItems: "center" }}>
 
+                  <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace", marginRight: '38px', marginLeft: '10px' }}>
+                    Age
+                  </Form.Label>
+
+                  <input
+                    style={{
+                      width: "45px",
+                      height: "25px",
+                      fontFamily: "Monospace", marginRight: '5px'
+                    }}
+                    type="number"
+                    value={year}
+                    onChange={(e) => setYear(parseInt(e.target.value))}
+                    isInvalid={!!errors.year}
+                  />
+
+                  <span style={{ fontFamily: "Monospace", marginRight: '5px' }}> Years </span>
+                  <input
+                    style={{
+                      width: "45px",
+                      height: "25px",
+                      fontFamily: "Monospace", marginRight: '8px'
+                    }}
+                    type="number"
+                    value={month}
+                    onChange={(e) => setMonth(parseInt(e.target.value))}
+                    isInvalid={!!errors.month}
+                  />
+                  <span style={{ fontFamily: "Monospace" }}> Months</span>
+                </div>
+
+                {errors.year && <div className="invalid-feedback">{errors.year}</div>}
+                {errors.month && <div className="invalid-feedback">{errors.month}</div>}
+              </Form.Group>
+              {/* {`////////////////////////////////////////////////////////////`} */}
+
+              {/* {`/////////////////////////// Gender /////////////////////////////////`} */}
+              <Form.Group className="mb-3">
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace", marginRight: '15px' }}>
+                    Gender
+                  </Form.Label>
+                  <br />
+                  <Form.Check
+                    type="radio"
+                    label="Male"
+                    name="gender"
+                    id="male"
+                    value="male"
+                    style={{ fontFamily: "Monospace", marginRight: '15px', fontSize: "20px" }}
+                    onChange={(e) => setGender(e.target.value)}
+                    isInvalid={!!errors.gender}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="Female"
+                    name="gender"
+                    id="female"
+                    value="female"
+                    style={{ fontFamily: "Monospace", fontSize: "20px", marginRight: '15px' }}
+                    onChange={(e) => setGender(e.target.value)}
+                    isInvalid={!!errors.gender}
+                  />
+                </div>
+                {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
+              </Form.Group>
+              {/* {`////////////////////////////////////////////////////////////`} */}
+
+            </div>
+            {/* {`/////////////////////////// Image /////////////////////////////////`} */}
             <Form.Group className="mb-3" controlId="formImageUrl">
-              <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace" }}>
-                Image URL
-              </Form.Label>
-              <Form.Control
-                type="text"
-                style={{ fontFamily: "Monospace" }}
-                placeholder="Enter image URL"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-                isInvalid={!!errors.imageUrl}
-              />
+              <div style={{ display: "flex", alignItems: "center" }}>
+
+                <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace", marginRight: "15px", marginLeft: '80px' }}>
+                  Image URL
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  style={{ fontFamily: "Monospace", width: '260px' }}
+                  placeholder="Enter image URL"
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                  isInvalid={!!errors.imageUrl}
+                />
+              </div>
               <Form.Control.Feedback type="invalid">
                 {errors.imageUrl}
               </Form.Control.Feedback>
             </Form.Group>
+            {/* {`///////////////////////////////////////////////////////////`} */}
 
+            {/* {`///////////////////////////Contact Number/////////////////////////////////`} */}
+            <Form.Group className="mb-3" controlId="formContactNumber">
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <span style={{ fontSize: "20px", fontFamily: "Monospace", marginLeft: "90px" }}>
+                  Phone
+                </span>
+
+                <PhoneInput style={{ fontSize: "20px", fontFamily: "Monospace", marginLeft: "50px" }}
+                  defaultCountry="jo"
+                  value={phone}
+                  onChange={(phone) => setPhone(phone)}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.setPhone}
+                </Form.Control.Feedback>
+              </div>
+            </Form.Group>
+            {/* {`///////////////////////////Temperament////////////////////////////////`} */}
             <Form.Group className="mb-3" controlId="formTemperament">
-              <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace" }}>
+              <span style={{ fontSize: "20px", fontFamily: "Monospace", marginLeft: "77px" }}>
                 Temperament
-              </Form.Label>
+              </span>
               <Form.Control
                 as="textarea"
-                style={{ fontFamily: "Monospace" }}
-                rows={3}
+                style={{ fontFamily: "Monospace", width: '300px', marginLeft: "77px" }}
+                rows={2}
                 value={temperament}
                 onChange={(e) => setTemperament(e.target.value)}
                 isInvalid={!!errors.temperament}
@@ -236,48 +288,37 @@ function AdoptionModal(props) {
                 {errors.temperament}
               </Form.Control.Feedback>
             </Form.Group>
+            {/* {`////////////////////////////////////////////////////////////`} */}
 
-            <Form.Group className="mb-3" controlId="formContactNumber">
-              <Form.Label style={{ fontSize: "20px", fontFamily: "Monospace" }}>
-                Contact Number
-              </Form.Label>
-              <Form.Control
-                type="text"
-                style={{ fontFamily: "Monospace" }}
-                placeholder="Enter Phone Number"
-                value={contactNumber}
-                onChange={(e) => setContactNumber(e.target.value)}
-                isInvalid={!!errors.contactNumber}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.contactNumber}
-              </Form.Control.Feedback>
-            </Form.Group>
+
+
           </Form>
         </Modal.Body>
-
-        <Modal.Footer style={{ backgroundColor: "#f8588d" }}>
-          <Button
+        {/* {`///////////////////////////Contact Number/////////////////////////////////`} */}
+        <Modal.Footer style={{ backgroundColor: "#80dfff" , height:'68px',fontFamily: "Monospace" }}>
+          <Button style={{ marginLeft: '125px' ,marginTop:'0px',backgroundColor: "#bf80ff", borderRadius:'25px',color:'black'}}
+            className="add-kitten-button"
+            onClick={handleSaveChanges}
+          >
+            Save Changes
+          </Button>
+          <Button 
             variant="secondary"
             className="add-kitten-button"
             style={{
               fontFamily: "Monospace",
               marginRight: "auto",
-              backgroundColor: "gray",
+              backgroundColor: "#bf80ff",
+              marginTop:'0px', borderRadius:'25px',color:'black'
             }}
             onClick={props.handleClose}
           >
             Close
           </Button>
-          <Button
-            className="add-kitten-button"
-            onClick={handleSaveChanges}
-            style={{ fontFamily: "Monospace", backgroundColor: "#28a745" }}
-          >
-            Save Changes
-          </Button>
+
         </Modal.Footer>
       </Modal>
+      
     </>
   );
 }

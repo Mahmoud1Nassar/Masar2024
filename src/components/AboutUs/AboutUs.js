@@ -4,8 +4,16 @@ import "./AboutUs.css";
 function AboutUs() {
     return (
         <div class="container" id="aboutUsSection">
-            <h1>About Us</h1>
-            <h4>Adopting a cat is more than just bringing a pet into your home, it's opening your heart to a profound and unique bond that will enrich your life in countless ways. Imagine the moment you first meet your new feline friend, their curious eyes peering up at you, filled with both hope and a little apprehension. As you gently reach out and they nuzzle into your hand, a silent promise is made between you two. This tiny creature, once perhaps abandoned or lonely, now finds solace in your care, and you discover a newfound joy in their companionship. Each purr, each playful swat, each quiet moment shared on the couch, strengthens a connection that words can scarcely capture. Adopting a cat isn't just about giving them a home; it's about creating a family where both hearts find a sense of belonging and love.</h4>
+            <h1>About Us</h1><br/>
+            <span style={{ fontSize: "20px", fontFamily: "Monospace"}}>
+                Adopting a cat isn't just about getting a pet.
+                 It's finding a lifelong friend and opening your heart to <br/> boundless joy.
+                  Imagine that magical first meeting: their curious eyes, tentative yet hopeful.
+                   In that instant,<br/> a silent promise is made - of trust, companionship, and happiness.
+                    Through playfulness, cuddles, and laughter, <br/>a deep bond blossoms.
+                     But it's more than gaining a pet; it's building a family where both find belonging.
+                      So, <br/>welcoming a cat means embarking on a journey of love and companionship, 
+                      filling<br/> your life with warmth and meaning.</span><br/>
             <div class="Mahmoud">
                 <a href="https://www.linkedin.com/in/abdallah-abuhalima-494086282/">
                     <img src="https://live.staticflickr.com/65535/53733914738_3d15d5042a_b.jpg" class="developersImages"></img>
@@ -13,13 +21,13 @@ function AboutUs() {
                 <h6>Mahmoud</h6>
             </div>
             <div class="Aya">
-                <a href="https://www.linkedin.com/in/aya-alwahidi-982a79156/">
+                <a href="https://www.linkedin.com/in/mahmoudal3nbtawi?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
                     <img src="https://live.staticflickr.com/65535/53733709961_709af8cdd8_n.jpg" class="developersImages" alt="Linked in"></img>
                 </a>
                 <h6>Aya</h6>
             </div>
             <div class="Saja">
-                <a href="https://www.linkedin.com/in/abdallah-abuhalima-494086282/">
+                <a href="https://www.linkedin.com/onboarding/start/people-you-may-know/new/?session_redirect=%2Fauthwall">
                     <img src="https://live.staticflickr.com/65535/53734136880_9dc6fc45ba_n.jpg" class="developersImages"></img>
                 </a>
                 <h6>Saja</h6>
