@@ -1,45 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../../images/LogoKittyCorner.jpg";
-import AdoptionModal from "../AdoptionModal/AdoptionModal";
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 
-export default function NavBar() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsModalOpen(false);
-  };
-
+export default function NavBar(props) {
+  // Scroll Function to the About us Section 
   const scrollToAboutUs = () => {
     const aboutUsSection = document.getElementById('aboutUsSection');
     if (aboutUsSection) {
-      const offsetPosition = aboutUsSection.offsetTop -  200;
+      const offsetPosition = aboutUsSection.offsetTop - 200;
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
     }
   };
-  
-  
 
   return (
+    // NavBar Element
     <div className="header">
       <ul>
         <li>
           <img src={logo} alt="Cat Logo" />
         </li>
         <li className="pop-up">
-          <button onClick={openModal} className="add-kitten-button">
+          {/* Link to SuccessfulStories page */}
+          <Link to="/" className="navbar-link">
+            <button className="add-kitten-button">
+              Home
+            </button>
+          </Link>
+        </li>
+        <li className="pop-up">
+          {/* Trigger handleShowModal function from props */}
+          <button onClick={props.onClick} id="AboutUs" style={{marginRight:'130px'}}>
             Bring a Cat Home
           </button>
         </li>
+        <li className="pop-up">
+          {/* Link to SuccessfulStories page */}
+          <Link to="/SuccessfulStories" className="navbar-link">
+            <button className="add-kitten-button">
+              SuccessfulStories
+            </button>
+          </Link>
+        </li>
       </ul>
-      <AdoptionModal show={isModalOpen} handleClose={handleClose} />
+      {/* Button to scroll to the About Us section */}
       <button id="AboutUs" onClick={scrollToAboutUs}>
         About Us
       </button>

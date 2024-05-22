@@ -1,6 +1,8 @@
 import React from "react";
 import "./AboutUs.css";
-
+import aya from "../../images/aya.jpeg"
+import mahmoud from "../../images/mahmoud.jpeg"
+import raghad from "../../images/raghad.jpeg"
 function AboutUs() {
     return (
         <div class="container" id="aboutUsSection">
@@ -15,19 +17,19 @@ function AboutUs() {
                       So, welcoming a cat means embarking on a journey of love and companionship, 
                       filling your life with warmth and meaning.</span><br/>
             <div class="Mahmoud">
-                <a href="https://www.linkedin.com/in/abdallah-abuhalima-494086282/">
-                    <img alt="hello"src="https://live.staticflickr.com/65535/53733914738_3d15d5042a_b.jpg" class="developersImages"></img>
+                <a href="https://www.linkedin.com/in/mahmoudal3nbtawi/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
+                    <img alt="hello" src={mahmoud} class="developersImages"></img>
                 </a>
                 <h6>Mahmoud</h6>
             </div>
             <div class="Aya">
-                <a href="https://www.linkedin.com/in/mahmoudal3nbtawi?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-                    <img alt="hello" src="https://live.staticflickr.com/65535/53733709961_709af8cdd8_n.jpg" class="developersImages" ></img>
+                <a href="https://www.linkedin.com/in/aya-alwahidi-982a79156/">
+                    <img alt="hello" src={aya} class="developersImages" ></img>
                 </a>
                 <h6>Aya</h6>
             </div>
             <div class="Saja">
-                <a href="https://www.linkedin.com/onboarding/start/people-you-may-know/new/?session_redirect=%2Fauthwall">
+                <a href="https://www.linkedin.com/in/saja-fawaz-43989530a/">
                     <img  alt="hello" src="https://live.staticflickr.com/65535/53734136880_9dc6fc45ba_n.jpg" class="developersImages"></img>
                 </a>
                 <h6>Saja</h6>
@@ -40,7 +42,7 @@ function AboutUs() {
             </div>
             <div class="Ragad">
                 <a href="https://www.linkedin.com/in/raghad-abdullah-bb3848216?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
-                    <img alt="hello" src="https://live.staticflickr.com/65535/53734175315_e74f437178_n.jpg" class="developersImages"></img>
+                    <img alt="hello" src={raghad} class="developersImages"></img>
                 </a>
                 <h6>Raghad</h6>
             </div>

@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+// Home.js
+import React from "react";
+import AdoptionModal from "../AdoptionModal/AdoptionModal";
 import "../Home/Home.css";
-// Define the Cat component outside of the Home component
-const CatCard = ({
-  name,
-  origin,
-  temperament,
-  color,
-  image,
-  age,
-  gender,
-  phone,
-}) => {
+
+const CatCard = ({ name, origin, temperament, color, image, age, gender, phone }) => {
   return (
-    
-    <div className={`cat-card ${gender.toLowerCase()}`} >
+    <div className={`cat-card ${gender.toLowerCase()}`}>
       <img src={image} alt={`${name}`} className="cat-image" />
       <div className="cat-details">
         <h2>{name}</h2>
@@ -29,39 +20,34 @@ const CatCard = ({
   );
 };
 
-function Home() {
-  const [cats, setCats] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://serverpro-1.onrender.com/")
-      .then((response) => {
-        setCats(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data!", error);
-      });
-  }, []);
-
+function Home(props) {
   return (
-    <div className="home">
-      <h1>Cats Story</h1>
-      <div className="cat-container">
-        {cats.map((cat) => (
-          <CatCard
-            key={cat.id}
-            name={cat.name}
-            origin={cat.origin}
-            temperament={cat.temperament}
-            color={cat.color}
-            image={cat.image}
-            age={cat.age}
-            gender={cat.gender}
-            phone={cat.phone}
-          />
-        ))}
+    <>
+      <div className="home">
+        <h1>Cats Story</h1>
+        <div className="cat-container">
+          {props.cats.map((cat, index) => (
+            <CatCard
+              key={index}
+              name={cat.name}
+              origin={cat.origin}
+              temperament={cat.temperament}
+              color={cat.color}
+              image={cat.image}
+              age={cat.age}
+              gender={cat.gender}
+              phone={cat.phone}
+            />
+          ))}
+        </div>
+        {/* Use props.handleShowModal and props.handleCloseModal */}
+        <AdoptionModal
+          show={props.showModal}
+          handleClose={props.handleCloseModal}
+          handleCatAdded={props.handleCatAdded} 
+        />
       </div>
-    </div>
+    </>
   );
 }
 
