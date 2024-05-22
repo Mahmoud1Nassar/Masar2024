@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../Home/Home.css";
-
 // Define the Cat component outside of the Home component
 const CatCard = ({
   name,
@@ -14,7 +13,8 @@ const CatCard = ({
   phone,
 }) => {
   return (
-    <div className={`cat-card ${gender.toLowerCase()}`}>
+    
+    <div className={`cat-card ${gender.toLowerCase()}`} >
       <img src={image} alt={`${name}`} className="cat-image" />
       <div className="cat-details">
         <h2>{name}</h2>

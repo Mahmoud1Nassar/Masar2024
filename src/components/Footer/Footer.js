@@ -15,16 +15,16 @@ export default function Footer() {
         </div>
         <div className="footer-social">
           <a href="https://www.facebook.com/">
-            <img src={imageF}></img>
+            <img alt="hello" src={imageF}></img>
           </a>
           <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
-          <img src={imageT}></img>
+          <img alt="hello" src={imageT}></img>
           </a>
           <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-          <img src={imageI}></img>
+          <img alt="hello" src={imageI}></img>
           </a>
           <a href="https://www.gmail.com/" target="_blank" rel="noopener noreferrer">
-          <img src={imageE}></img>
+          <img alt="hello" src={imageE}></img>
           </a>
         </div>
         <button className="back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>

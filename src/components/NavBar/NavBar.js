@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "./LogoKittyCorner.jpg";
+import logo from "../../images/LogoKittyCorner.jpg";
 import AdoptionModal from "../AdoptionModal/AdoptionModal";
 import "./NavBar.css";
 
