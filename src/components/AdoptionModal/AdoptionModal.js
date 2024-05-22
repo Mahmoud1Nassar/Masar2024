@@ -6,6 +6,7 @@ import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import '../AdoptionModal/AdoptionModal.css';
 import BGM from "../../images/BGM.jpg";
+
 function AdoptionModal(props) {
   const [year, setYear] = useState(0);
   const [month, setMonth] = useState(1);
@@ -54,12 +55,23 @@ function AdoptionModal(props) {
 
     setErrors(newErrors);
 
+///////////////////////////////Manage the data will appears in the card about the Age///////////////////////////////////////////////
     if (Object.keys(newErrors).length === 0) {
+      let ageValue = "";
+      if (year === 0) {
+        ageValue = `${month} Months`;
+      } else if (month === 0){
+        ageValue = `${year} Years`;
+      } else {
+        ageValue = `${year} Years and ${month} Months`;
+      }
+///////////////////////////////////////////////////////////////////////////
+
       const catData = {
         name,
         origin: selectedOption?.value,
         color: selectedColor?.value,
-        age: `${year} Years and ${month} Months`,
+        age: ageValue,
         gender,
         image: imageUrl,
         temperament,
@@ -90,18 +102,18 @@ function AdoptionModal(props) {
 
   return (
     <>
-    
+
       <Modal show={props.show} onHide={props.handleClose}  >
         {/* {`/////////////////////////// Headr /////////////////////////////////`} */}
-        <Modal.Header closeButton style={{ backgroundColor: "#ffe6e6" , height:'55px'}}>
-         <center> <span style={{ fontSize: "30px", fontFamily: "Monospace",marginLeft:'90px' }}>
+        <Modal.Header closeButton style={{ backgroundColor: "#ffe6e6", height: '55px' }}>
+          <center> <span style={{ fontSize: "30px", fontFamily: "Monospace", marginLeft: '90px' }}>
             Bring a Cat Home
           </span></center>
         </Modal.Header>
 
         {/* {`/////////////////////////// /////////////////////////////////`} */}
 
-        <Modal.Body style={{ backgroundImage:`url(${BGM})` , height:'550px'}}>
+        <Modal.Body style={{ backgroundImage: `url(${BGM})`, height: '550px' }}>
           <Form>
             {/* {`/////////////////////////// Name /////////////////////////////////`} */}
             <div style={{ marginLeft: '80px' }}>
@@ -131,7 +143,7 @@ function AdoptionModal(props) {
                     Origin
                   </span>
                   <Select
-                    style={{ fontFamily: "Monospace" , width: '260px' }}
+                    style={{ fontFamily: "Monospace", width: '260px' }}
                     options={options}
                     value={selectedOption}
                     onChange={setSelectedOption}
@@ -148,7 +160,7 @@ function AdoptionModal(props) {
                   <span style={{ fontSize: "20px", fontFamily: "Monospace", marginRight: '25px' }}>
                     Color </span>
                   <Select
-                    style={{ fontFamily: "Monospace" , width: '260px' }}
+                    style={{ fontFamily: "Monospace", width: '260px' }}
                     options={colors}
                     value={selectedColor}
                     onChange={setSelectedColor}
@@ -292,37 +304,37 @@ function AdoptionModal(props) {
 
 
 
-        
-        {/* {`///////////////////////////Buttons ////////////////////////////////`} */}
-        <Form.Group className="mb-3" controlId="formTemperament">
 
-          <Button style={{ marginLeft: '125px' ,marginTop:'0px',backgroundColor: "#99ddff", borderRadius:'25px',color:'black'}}
-            className="add-kitten-button"
-            onClick={handleSaveChanges}
-          >
-            Save Changes
-          </Button>
-          <Button 
-            variant="secondary"
-            className="add-kitten-button"
-            style={{
-              fontFamily: "Monospace",
-              marginRight: "auto",
-              backgroundColor: "#99ddff",
-              marginTop:'0px', borderRadius:'25px',color:'black',marginLeft:'10px'
-            }}
-            onClick={props.handleClose}
-          >
-            Close
-          </Button>
-          </Form.Group>
-   {/* {`////////////////////////////////////////////////////////////`} */}
+            {/* {`///////////////////////////Buttons ////////////////////////////////`} */}
+            <Form.Group className="mb-3" controlId="formTemperament">
+
+              <Button style={{ marginLeft: '125px', marginTop: '0px', backgroundColor: "#99ddff", borderRadius: '25px', color: 'black' }}
+                className="add-kitten-button"
+                onClick={handleSaveChanges}
+              >
+                Save Changes
+              </Button>
+              <Button
+                variant="secondary"
+                className="add-kitten-button"
+                style={{
+                  fontFamily: "Monospace",
+                  marginRight: "auto",
+                  backgroundColor: "#99ddff",
+                  marginTop: '0px', borderRadius: '25px', color: 'black', marginLeft: '10px'
+                }}
+                onClick={props.handleClose}
+              >
+                Close
+              </Button>
+            </Form.Group>
+            {/* {`////////////////////////////////////////////////////////////`} */}
 
           </Form>
         </Modal.Body>
-      
+
       </Modal>
-      
+
     </>
   );
 }
