@@ -5,7 +5,7 @@ import axios from "axios";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import '../AdoptionModal/AdoptionModal.css';
-
+import BGM from "../../images/BGM.jpg";
 function AdoptionModal(props) {
   const [year, setYear] = useState(0);
   const [month, setMonth] = useState(1);
@@ -91,17 +91,17 @@ function AdoptionModal(props) {
   return (
     <>
     
-      <Modal show={props.show} onHide={props.handleClose}   >
+      <Modal show={props.show} onHide={props.handleClose}  >
         {/* {`/////////////////////////// Headr /////////////////////////////////`} */}
-        <Modal.Header closeButton style={{ backgroundColor: "#80dfff" , height:'55px'}}>
-         <center> <span style={{ fontSize: "30px", fontFamily: "Monospace",marginLeft:'70px' }}>
+        <Modal.Header closeButton style={{ backgroundColor: "#ffe6e6" , height:'55px'}}>
+         <center> <span style={{ fontSize: "30px", fontFamily: "Monospace",marginLeft:'90px' }}>
             Bring a Cat Home
           </span></center>
         </Modal.Header>
 
         {/* {`/////////////////////////// /////////////////////////////////`} */}
 
-        <Modal.Body style={{ backgroundColor: "	#ffcccc" , height:'500px'}}>
+        <Modal.Body style={{ backgroundImage:`url(${BGM})` , height:'550px'}}>
           <Form>
             {/* {`/////////////////////////// Name /////////////////////////////////`} */}
             <div style={{ marginLeft: '80px' }}>
@@ -131,7 +131,7 @@ function AdoptionModal(props) {
                     Origin
                   </span>
                   <Select
-                    style={{ fontFamily: "Monospace" }}
+                    style={{ fontFamily: "Monospace" , width: '260px' }}
                     options={options}
                     value={selectedOption}
                     onChange={setSelectedOption}
@@ -148,7 +148,7 @@ function AdoptionModal(props) {
                   <span style={{ fontSize: "20px", fontFamily: "Monospace", marginRight: '25px' }}>
                     Color </span>
                   <Select
-                    style={{ fontFamily: "Monospace" }}
+                    style={{ fontFamily: "Monospace" , width: '260px' }}
                     options={colors}
                     value={selectedColor}
                     onChange={setSelectedColor}
@@ -292,11 +292,11 @@ function AdoptionModal(props) {
 
 
 
-          </Form>
-        </Modal.Body>
-        {/* {`///////////////////////////Contact Number/////////////////////////////////`} */}
-        <Modal.Footer style={{ backgroundColor: "#80dfff" , height:'68px',fontFamily: "Monospace" }}>
-          <Button style={{ marginLeft: '125px' ,marginTop:'0px',backgroundColor: "#bf80ff", borderRadius:'25px',color:'black'}}
+        
+        {/* {`///////////////////////////Buttons ////////////////////////////////`} */}
+        <Form.Group className="mb-3" controlId="formTemperament">
+
+          <Button style={{ marginLeft: '125px' ,marginTop:'0px',backgroundColor: "#99ddff", borderRadius:'25px',color:'black'}}
             className="add-kitten-button"
             onClick={handleSaveChanges}
           >
@@ -308,15 +308,19 @@ function AdoptionModal(props) {
             style={{
               fontFamily: "Monospace",
               marginRight: "auto",
-              backgroundColor: "#bf80ff",
-              marginTop:'0px', borderRadius:'25px',color:'black'
+              backgroundColor: "#99ddff",
+              marginTop:'0px', borderRadius:'25px',color:'black',marginLeft:'10px'
             }}
             onClick={props.handleClose}
           >
             Close
           </Button>
+          </Form.Group>
+   {/* {`////////////////////////////////////////////////////////////`} */}
 
-        </Modal.Footer>
+          </Form>
+        </Modal.Body>
+      
       </Modal>
       
     </>

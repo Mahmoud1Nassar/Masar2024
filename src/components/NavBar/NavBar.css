@@ -75,7 +75,7 @@
   left: -30px; /* Start position of the cat image */
   width: 40px; /* Width of the cat image */
   height: 40px; /* Height of the cat image */
-  background-image: url('./cartoonFlip.png'); /* Path to your cat image */
+  background-image: url('../../images/cartoonFlip.png'); /* Path to your cat image */
   background-size: cover;
   background-repeat: no-repeat;
   transform: translateY(-50%);
