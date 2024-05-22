@@ -67,7 +67,7 @@ function AdoptionModal(props) {
       };
       //This For adding cats to the database
       try {
-        await axios.post("https://serverpro-1.onrender.com/addCat", catData);
+        await axios.post("https://serverpro-qni2.onrender.com/addCat", catData);
         props.handleClose();
       } catch (error) {
         console.error("Error saving cat data:", error);

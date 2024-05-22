@@ -34,7 +34,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("https://serverpro-1.onrender.com/")
+      .get("https://serverpro-qni2.onrender.com/")
       .then((response) => {
         setCats(response.data);
       })
