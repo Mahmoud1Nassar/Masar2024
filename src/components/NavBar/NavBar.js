@@ -41,7 +41,7 @@ export default function NavBar(props) {
           {/* Link to SuccessfulStories page */}
           <Link to="/SuccessfulStories" className="navbar-link">
             <button className="add-kitten-button">
-              SuccessfulStories
+              Successfull Stories
             </button>
           </Link>
         </li>
